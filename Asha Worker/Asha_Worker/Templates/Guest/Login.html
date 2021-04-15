@@ -1,0 +1,39 @@
+{% load static %}
+
+<html>
+
+<head>
+<title>Login Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Gaming Login Form Widget Tab Form,Login Forms,Sign up Forms,Registration Forms,News letter Forms,Elements"/>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{% static 'Guest/Login/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+	<div class="padding-all">
+		<div class="header">
+			<h1><img src="{% static 'Guest/Login/images/asha.jfif' %}" alt=" "> Login Form</h1>
+		</div>
+
+		<div class="design-w3l">
+			<div class="mail-form-agile">
+				<form action="#" method="POST">
+					{% csrf_token %}
+					<input type="email" name="username" placeholder="E-Mail" required=""/>
+					<input type="password"  name="password" class="padding" placeholder="Password" required=""/>
+					<input type="submit" value="submit">
+				</form>
+				<br>
+				<!--<span style="color: white;">New User ? </span><a href=""><span style="color:#D65B88">Register Here...</span></a>-->
+			</div>
+		  <div class="clear"> </div>
+		</div>
+		
+		<div class="footer">
+		<!--<p>© 2020  All Rights Reserved | Design by  <a href="" >  Govt of India </a></p>-->
+		</div>
+	</div>
+</body>
+</html>
