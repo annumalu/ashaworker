@@ -1,0 +1,107 @@
+{% extends 'Base.html' %}
+{% block body %}
+
+
+	<div class="container-contact100">
+<!--		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div> -->
+			<!--<div class="contact100-map" style="background-image: url(../Static/images/bg-03.jpg);" data-scrollwhell="0" data-draggable="1"></div>-->
+			<div class="contact100-map" style="background-color: gainsboro;" data-scrollwhell="0" data-draggable="1"></div>
+		<div class="wrap-contact100">
+			<div class="contact100-form-title" style="background-image: url(../Static/images/bg-01.jpg);">
+				<span class="contact100-form-title-1">
+					Registration
+				</span>
+
+				<span class="contact100-form-title-2">
+					Enter your personal details
+				</span>
+			</div>
+
+			<form class="contact100-form validate-form" method="POST">
+				{% csrf_token %}
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Membership Id:</span>
+					<input class="input100" type="text" name="membership" value="{{ ID }}" id="membershipId" placeholder="" required readonly>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Full Name:</span>
+					<input class="input100" type="text" name="fullname" id="fullnamenameId" placeholder="full name" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Gender:</span>
+					<select class="input100" name="gender" id="gender" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Gender...</option> 
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+				</div>
+				
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Address:</span>
+					<input class="input100" type="text" name="address" id="addressId" placeholder="address" required>
+					<span class="focus-input100"></span>
+                </div>
+                
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">State:</span>
+					<select class="input100" name="state" id="state" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select State...</option> 
+                    </select>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">District:</span>
+					<select class="input100" name="district" id="district" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select District...</option> 
+                    </select>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">Panchayath:</span>
+					<select class="input100" name="panchayath" id="panchayath" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Panchayath/Muncipality...</option> 
+                    </select>
+                </div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Ward:</span>
+					<select class="input100" name="ward" id="ward" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Ward...</option> 
+                    </select>
+                </div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Mobile:</span>
+					<input class="input100" type="text" name="mobile" id="mobileId" placeholder="eg : 7095809073" pattern="[789][0-9]{9}" minlength="10" maxlength="10" required>
+					<span class="focus-input100"></span>
+                </div>
+                
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">Email:</span>
+					<input class="input100" type="text" name="email" id="emailId" placeholder="eg : example123@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+					<span class="focus-input100"></span>
+                </div>
+
+				<div>
+					<div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" style="margin-left: 50px;">
+                            <span>
+                                CREATE
+                            </span>
+                        </button>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+	{% endblock %}

@@ -1,0 +1,149 @@
+﻿{% extends "Staff/Base.html" %}
+{% load static %}
+
+{% block head %}
+				<li class="text-center">
+                    <img src="{% static 'Staff/assets/img/find_user.png' %}" class="user-image img-responsive"/>
+					</li>
+				
+					
+                    <li>
+                        <a   href="{% url 'StaffHome' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                     <li>
+                        <a  href="{% url 'Add_Asha' %}"><i class="fa fa-plus-circle fa-3x"></i> Asha Worker</a>
+                    </li>
+                    <li>
+                        <a  href=""><i class="fa fa-money fa-3x"></i> Payments</a>
+                    </li>
+                    <li>
+                        <a  href=""><i class="fa fa-envelope fa-3x"></i> Pension</a>
+                    </li>
+                    <li>
+                        <a  href="{% url 'Insurance' %}"><i class="fa fa-heart fa-3x"></i> Insurance</a>
+                    </li>
+                    <li>
+                        <a class="active-menu" href="{% url 'StaffFeedback' %}"><i class="fa fa-location-arrow fa-3x"></i> Feedback</a>
+                    </li>
+					<li>
+                        <a    href="{% url 'StaffReports' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Reports</a>
+                    </li>			
+                  <li>
+                        <a  href="{% url 'Logout' %}"><i class="fa fa-sign-out fa-3x"></i> Logout</a>
+                    </li>	
+
+                    {% endblock  %}
+
+                    {% block body %}
+
+        <div id="page-wrapper" >
+            <div id="page-inner">
+
+				<div class="col-md-12 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Feedback Page
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="#profile-pills" data-toggle="tab">Feedback</a>
+                                </li>
+                                <li class=""><a href="#messages-pills" data-toggle="tab">Forms</a>
+                                </li>
+                                <li ><a href="#settings-pills" data-toggle="tab">Notifications</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="profile-pills">
+									<br>
+									<center><h2 class="card-title">FEEDBACK ON REPORTS</h2></center> 
+									<br>
+            <form method="POST">
+                  {% csrf_token %}							
+		 <div class="row">
+
+       <div class="col-md-6 text-center">
+          <div class="card">
+             <div class="card-body">
+                 
+                <select name="rptid" class="nav-item dropdown form-control mr-sm-2" id="gender" required>
+                    <option value="" disabled selected hidden>Choose Report</option>
+                    {% for data in report %}
+                    <option value="{{data.id}}">{{data.Auth_Id.Auth_Id}} ({{data.Subject}})</option>
+                    {% endfor %}
+                </select><br>
+
+                <textarea class="form-control mr-sm-2" required placeholder="Enter your feedback.." name="feedback" ></textarea>
+       
+                <br>
+      
+             </div>
+       </div>
+       </div> 
+        
+                 <div class="col-md-6 text-center">
+          <div class="card">
+             <div class="card-body">
+        
+                 <button type="submit" name="feedback_btn" class="btn btn-success btn-md form-control" >Submit</button>
+         
+             </div>
+          </div>
+       </div>    
+    </div>
+
+    </form>
+                                </div>
+                                <div class="tab-pane fade" id="messages-pills">
+                                  
+									  <form action="" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+    <div class="card">
+       <div class="card-body">
+      <center><h2 class="card-title">SEND FORMS</h2></center> 
+           <hr>
+           <input class="form-control mr-sm-2" name="subject" id="old" type="text" placeholder="Enter Title" required><br>
+               
+           <input class="form-control mr-sm-2" name="forms"  type="text" onfocus="(this.type='file')" id="myid" placeholder="Upload Forms" title="Upload Forms" required accept="application/pdf" onchange="validatePDF(this)" onblur="return formOK;">
+           <br>
+           <textarea class="form-control mr-sm-2" placeholder="Enter your comments.." name="comment" required></textarea>
+           <br>
+           <button type="submit" name="form_btn" class="btn btn-success btn-md form-control" >Send</button>
+           <br>
+          
+       </div>
+    </div>
+
+  </form>
+                                </div>
+                                <div class="tab-pane fade " id="settings-pills">
+                                   <div class="card">
+           <div class="card-body">
+             <center><h2 class="card-title">Contact Asha Workers</h2></center> 
+               <hr>
+    
+    
+              <form action="" method="POST">
+
+               {% csrf_token %}
+    
+               <input class="form-control mr-sm-2" name="Sub" type="text" placeholder="Title" required><br>
+               <input class="form-control mr-sm-2" name="Isu" type="textarea" placeholder="Comments Optional" ><br>
+               <textarea class="form-control mr-sm-2" name="Desc" placeholder="Description" required></textarea><br>
+               <button type="submit" name="not_btn" class="btn btn-info btn-md form-control" >Submit</button> <br>
+    
+              </form>
+           </div>
+        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div> 
+            
+            {% endblock  %}
