@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: right !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 5px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+        <style>
+            table, th, td {
+              padding: 5px;
+            }
+            table {
+              border-spacing: 15px;
+            }
+            </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <p class='title'><strong><u>BILL INVOICE</u></strong></p>
+            </div>
+        </div>
+        <div class='details'>
+            <b>DATE    :</b> {{Date}}<br>
+            <b>Card      :</b> {{Data.Card}}
+            <hr class='hrItem' />
+        </div>
+        
+        <tr class="information">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Authority,</h2>
+                            Asha Worker Club<br>
+                            Buliding #1109,Thiruvananthapuram.605036<br>
+                            0471-5455666,7890009890<br>
+                            contact@gmail.com
+                        </td>
+                        
+                        <td>
+                            <h2>Bill To,</h2>
+                            {{Data.First_Name}} {{Data.Last_Name}}<br>
+                            {{Data.Addr1}} , {{Data.Addr2}} , {{Data.Pin}}<br>
+                            {{Data.State}} , {{Data.Country}}<br>
+                            {{Data.Email}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <br>
+        <b>Payment Details : </b>
+        <br>
+        <table>
+            <thead>
+              <tr style="background-color:lightblue">
+                <th><span style="color: brown;">Payment Method</span></th>
+                <th><span style="color: brown;">Date</span></th>
+                <th><span style="color: brown;">Amount</span></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td class="unit"><center>Debit/Credit Card</center></td>
+                <td class="qty"><center>{{Date}}</center></td>
+                <td class="total"><center>{{Data.Amount}}</center></td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <div class='details'>
+            <strong>SUB TOTAL  :</strong>  <span style="color:red"><b>{{Data.Amount}}</b></span><br>
+            <hr class='hrItem' />
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p><center><span style="color: green;">THANKS FOR THE PAYMENT</span></center></p>
+        <p><center>If you have any questions about this invoice , please contact</center></p>
+        <p><center>555-5555555</center></p>
+        <center>contact@gmail.com</center>
+    </body>
+</html>

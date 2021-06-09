@@ -1,0 +1,62 @@
+{% extends 'Base.html' %}
+{% block body %}
+
+{% if messages %}
+      {% for message in messages %}
+      <script>
+		  alert('Incorrect Username/Password!')
+	  </script>
+      {% endfor %}
+  {% endif %}
+
+	<div class="container-contact100">
+<!--		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div> -->
+			<div class="contact100-map" style="background-image: url(../static/images/bg-02.jpg);" data-scrollwhell="0" data-draggable="1"></div>
+
+		<div class="wrap-contact100">
+
+			<div class="contact100-form-title" style="background-image: url(../static/images/login.png);">
+				<span class="contact100-form-title-1">
+					Password Reset
+				</span>
+			</div>
+
+			<form class="contact100-form validate-form" action="" method="POST">
+				{% csrf_token %}
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">UserName:</span>
+					<input class="input100" type="email" name="username" id="usernameId" placeholder="Enter Your Registered Email" required>
+					<span class="focus-input100"></span>
+				</div>
+
+                <div class="flex-sb-m w-full p-b-30">
+						<div></div>
+
+						<div>
+							<a href="{% url 'GuestHome' %}" class="txt1">
+								Back To Login?
+							</a>
+						</div>
+					</div>
+
+				<div>
+					<div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" style="margin-left: 50px;">
+                            <span>
+                                Reset
+                                <i class="fa fa-sign-in m-l-7" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+	{% endblock %}

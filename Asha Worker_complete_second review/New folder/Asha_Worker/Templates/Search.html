@@ -1,0 +1,353 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <style>
+      * {box-sizing: border-box}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container1 {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+    width: 100%;
+  }
+}
+    </style>
+
+    <style>
+       
+      .alert {
+        padding: 9px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+      
+      .alert.success {background-color: #4CAF50;}
+      .alert.info {background-color: #2196F3;}
+      .alert.warning {background-color: #ff9800;}
+      
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .closebtn:hover {
+        color: black;
+      }
+    
+      .input-icons i { 
+         position: absolute; 
+     } 
+       
+     .input-icons { 
+         width: 100%; 
+         margin-bottom: 10px; 
+     } 
+       
+     .icon { 
+         padding: 10px; 
+         color: green; 
+         min-width: 50px; 
+         text-align: center; 
+     } 
+       
+     .input-field { 
+         width: 100%; 
+         padding: 10px; 
+         text-align: center; 
+     } 
+       
+     h2 { 
+         color: green; 
+     } 
+    
+      </style>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REGISTER BOOK</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'Base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
+
+  </head>
+  <body >
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       
+      <a class="navbar-brand" href="#"><p><h2>ASHA | SEARCH</h2></p></a>
+      
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         
+            <ul class="navbar-nav mr-auto">
+            
+          <li>
+          </li>		  
+            </ul>
+              
+            <form class="form-inline my-2 my-lg-0">
+              <li class="nav-link"> <a  href="{% url 'AshaHome' %}">  
+                <i class="fa fa-home" style="font-size: 32px; color:white;"></i>
+              </a>
+               </li> 
+
+             <li class="nav-link"> <a  href="{% url 'Logout' %}">  
+              <i class="fas fa-sign-out-alt" style="font-size: 32px; color:white;"></i>
+            </a>
+             </li> 
+             
+       </form>
+         </div>
+      </nav>
+
+  <div class="container">
+    <br> <br>
+    <form method="GET" action="{% url 'Advancedsearch' %}">
+      {% csrf_token %}
+    <div class="row input-group">
+      <div class="col-3"></div>
+      <div class="col-4">
+        <input type="text" class="form-control" name="result" placeholder="Search Name" required>
+      </div>
+      <div class="col-2">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-search"> Search</i>
+        </button>
+      </div>
+      </div>
+    </form>
+  </div>
+ 
+    <div class="container">
+      <br>
+      <div class="row">
+
+      <label><strong><span style="color:#534d4d">Search Details :</span></strong></label>
+
+      <table class="table table-bordered table-hover table-responsive-lg">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Member ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Ward</th>
+              <th scope="col">Contact</th>
+              <th scope="col">District</th>
+              <th scope="col" colspan="2"><center>Options</center></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ data.Auth_Id }}</td>
+              <td>{{ data.Name }}</td>
+              <td>{{ data.Address }}</td>
+              <td>{{ data.Ward }}</td>
+              <td>{{ data.Phone }}</td>
+              <td>{{ data.Distrct }}</td>
+              <td>
+                <form action="{% url 'Profile_Home' %}" method="GET">
+                  <input type = "text"  hidden value="{{data.Auth_Id}}" name="AuthId">
+                 <input type="submit" value ="View" class="form-control btn btn-success"/>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% if messages %}
+      {% for message in messages %}
+      <br> 
+    <div class="alert alert-info form-control">
+      <strong>{{ message }}</strong> 
+    </div>
+    <br>
+      {% endfor %}
+  {% endif %}
+
+        </div>
+
+        </div>
+
+ 
+    <br>
+
+         <!-- Message button --> 
+         <script>
+        
+          var close = document.getElementsByClassName("closebtn");
+          var i;
+          
+          for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+              var div = this.parentElement;
+              div.style.opacity = "0";
+              setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+          }
+          </script>
+
+          <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+            </script>
+
+            <script>
+
+            function ConfirmDelete(msg){
+              var result = confirm(msg)
+              if(result){
+                  return true
+              }
+              else{
+                return false
+              }
+          }
+
+        </script>
+
+         <!-- Message button --> 
+<script>
+        
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+  
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="{% static 'User/js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="{% static 'User/js/popper.min.js' %}"></script>
+    <script src="{% static 'User/js/bootstrap-4.0.0.js' %}"></script>
+    
+  </body>
+</html>

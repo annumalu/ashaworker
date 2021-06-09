@@ -1,0 +1,118 @@
+{% extends 'User_Base.html' %}
+{% load static %}
+
+ {% block body %}
+
+ {% if messages %}
+     {% for message in messages %}
+     <br>
+     <div class="alert">
+      <span class="closebtn">&times;</span>  
+     <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+   </div>
+   <br>
+     {% endfor %}
+ {% endif %}
+ 
+
+<div class="container mt-5" style="display: flex;
+justify-content: center">
+
+<div class="row justify-content-center">
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/add-user.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Add new Member </h5>
+      <p class="card-text">Add a new Member to database by filling out the required forms .</p>
+      <a href="{% url 'Profile' %}"class="btn btn-primary" >New Member</a>
+       <a href="{% url 'Download' %}"class="btn btn-link" >Download Members</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class="card shadow p-3 mb-5" style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/document.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Update Profile</h5>
+      <p class="card-text"> View / Edit / Add details of an Existing member .</p>
+     <form action="{% url 'Profile_Home' %}" method="GET">
+
+        <input  class="form-control"  type="text" AuthId name="AuthId" placeholder="Member ID" pattern="[MB]{2}[0-9]{10}" title="Please Enter MBXXXXXXXXXX format" maxlength="12" required>
+
+      <input class="btn btn-primary  mt-2 " type="submit" value="Find Profile">
+      </form>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+<div class="card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/searching.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Find Details</h5>
+      <p class="card-text">Quick search the peoples who registered in this application with categories</p>
+      <a href="{% url 'Search' %}" class="btn btn-primary">Search Details</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/report.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Monthly Report </h5>
+      <p class="card-text">Send monthly report to organizer .</p>
+      <a href="{% url 'Report' %}" class="btn btn-primary">Send Report</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/user1.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Profile Home </h5>
+      <p class="card-text">Manage Your Profile.</p>
+      <a href="{% url 'Profile_Page' %}" class="btn btn-primary">Profile Page</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/business-card.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Queries From Users </h5>
+      <p class="card-text">Pending Queries <strong><span style="color: red;">{{pend}}</span></strong>.</p>
+      <a href="{% url 'Contact_User' %}" class="btn btn-primary">Reply To {{pend}}</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/google-forms.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Survey Forms </h5>
+      <p class="card-text">Download survey forms from organizer .</p>
+      <a href="{% url 'Forms' %}" class="btn btn-primary">View Forms</a>
+    </div>
+  </div>
+
+  <div class ="mt-2 mb-2 ml-2 mr-2"></div>
+
+  <div class=" card shadow p-3 mb-5 " style="width: 16rem;">
+    <img class="card-img-top" src="{% static 'Asha/images/icons/bell.svg'%}" alt="Card image cap" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">Notifications </h5>
+      <p class="card-text">Notification from organizer</p>
+      <a href="{% url 'Notifications' %}" class="btn btn-primary">Notifications</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

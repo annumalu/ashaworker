@@ -1,0 +1,523 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <style>
+      * {box-sizing: border-box}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container1 {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+    width: 100%;
+  }
+}
+    </style>
+
+    <style>
+       
+      .alert {
+        padding: 9px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+      
+      .alert.success {background-color: #4CAF50;}
+      .alert.info {background-color: #2196F3;}
+      .alert.warning {background-color: #ff9800;}
+      
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .closebtn:hover {
+        color: black;
+      }
+    
+      .input-icons i { 
+         position: absolute; 
+     } 
+       
+     .input-icons { 
+         width: 100%; 
+         margin-bottom: 10px; 
+     } 
+       
+     .icon { 
+         padding: 10px; 
+         color: green; 
+         min-width: 50px; 
+         text-align: center; 
+     } 
+       
+     .input-field { 
+         width: 100%; 
+         padding: 10px; 
+         text-align: center; 
+     } 
+       
+     h2 { 
+         color: green; 
+     } 
+    
+      </style>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REGISTER BOOK</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'Base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
+
+  </head>
+  <body >
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       
+      <a class="navbar-brand" href="#"><p><h2>USER | HOME</h2></p></a>
+      
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         
+            <ul class="navbar-nav mr-auto">
+            
+          <li>
+          </li>		  
+            </ul>
+              
+            <form class="form-inline my-2 my-lg-0">
+
+              <li class="nav-link"> <span style="color: white;">Welcome : {{user.username}}</span>  
+               </li> 
+              <li class="nav-link"> <a  href="{% url 'UserHome' %}">  
+                <i class="fa fa-home" style="font-size: 32px; color:white;"></i>
+              </a>
+               </li> 
+
+             <li class="nav-link"> <a  href="{% url 'Logout' %}">  
+              <i class="fas fa-sign-out-alt" style="font-size: 32px; color:white;"></i>
+            </a>
+             </li> 
+             
+       </form>
+         </div>
+      </nav>
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <br>
+      <div class="alert success">
+       <span class="closebtn">&times;</span>  
+      <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    </div>
+    <br>
+      {% endfor %}
+  {% endif %}
+ 
+       <div class="container">
+
+        <br><br>
+
+        <div class="row">
+                        <div class="col-md-3">
+                            <div class=" card shadow p-3 mb-5 " style="width: 15rem;">
+                                <img class="card-img-top" src="{% static 'Asha/images/icons/user.svg'%}" alt="Card image cap" height="150px">
+                                <div class="card-body">
+                                  <center><a href="{% url 'Contact' %}"class="btn btn-primary" >Asha Worker</a></center>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class=" card shadow p-3 mb-5 " style="width: 15rem;">
+                                <img class="card-img-top" src="{% static 'Asha/images/icons/notification.svg'%}" alt="Card image cap" height="150px">
+                                <div class="card-body">
+                                  <center><a href="{% url 'User_Notifications' %}"class="btn btn-primary" >Notifications</a></center>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class=" card shadow p-3 mb-5 " style="width: 15rem;">
+                                <img class="card-img-top" src="{% static 'Asha/images/icons/pregnant.svg'%}" alt="Card image cap" height="150px">
+                                <div class="card-body">
+                                  <center><a href="{% url 'Pregnancy' %}"class="btn btn-primary" >Pregnant Women</a></center>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class=" card shadow p-3 mb-5 " style="width: 15rem;">
+                                <img class="card-img-top" src="{% static 'Asha/images/icons/medical-report.svg'%}" alt="Card image cap" height="150px">
+                                <div class="card-body">
+                                  <center><a href="{% url 'Palliative' %}" class="btn btn-primary" >Palliative Care</a></center>
+                                </div>
+                              </div>
+                        </div>
+              
+        </div>
+
+        <div class="row">
+     
+           <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                  <center><h4 class="card-title">PROFILE DETAILS</h4></center>
+                   <hr>
+                   <div class="row">
+                       <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                    <label><strong>Member ID :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Aadhar Number"  readonly  value="{{ Profile.Auth_Id }}">
+                   <label><strong>Status :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Grade"  disabled value="{{ Profile.Status}}">
+                   <label><strong>House Name :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="House Name" disabled  value="{{ Profile.Address }}">
+                   <label><strong>District :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Group"  disabled value="{{ Profile.Distrct }}">
+                   <label><strong>Phone :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Phone" disabled value="{{ Profile.Phone }}">
+                   <label><strong>Created :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Created"  disabled value="{{ Profile.Created_Date }}"><br>
+                   
+                   </div>
+                   </div>
+                   
+                   </div>
+                   
+                   <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                    <label><strong>Profile Name :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Profile Name" disabled value="{{ Profile.Name }}" >
+                   <label><strong>Gender :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Grade"  disabled value="{{ Profile.Gender}}">
+                   <label><strong>Ward :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Ward" disabled  value="{{ Profile.Ward }}" >
+                   <label><strong>Panchayath :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Unit" disabled value="{{ Profile.Pan_Mun }}" >
+                   <label><strong>Email :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Email" disabled value="{{ Profile.Email }}" >
+                   <label><strong>Family Members :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder="Family Members"  disabled value="{{ Family|length }}"><br>
+               </div>
+            </div>
+  
+         </div>   
+         </div>
+         <hr>
+         <center><h4 class="card-title">ASHA WORKER DETAILS</h4></center>
+         <hr>
+
+                   <div class="row">
+                    <div class="col-md">
+                      <div class="">
+                      <div class="card-body">
+                     <label><strong>Name :</strong></label>
+                     <input class="form-control mr-sm-2" type="text" placeholder="" disabled value="{{ asha.User.first_name  }} {{ asha.User.last_name  }}" >
+                     </div>
+                     </div>
+                 </div> 
+                       <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                    <label><strong>Phone :</strong></label>
+                   <input class="form-control mr-sm-2" type="text" placeholder=""  readonly  value="{{ asha.Mobile  }}">
+
+                   </div>
+                   </div>
+
+                   </div>
+                   
+                   <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                      <label><strong>Email :</strong></label>
+                      <input class="form-control mr-sm-2" type="text" placeholder="t" disabled value="{{ asha.Auth_Id }}" >
+                      </div>
+                      </div>
+                  </div>     
+                  
+         </div>
+
+                  </div>
+                </div>
+              </div>
+
+              
+      </div>
+             
+    </div>
+
+    <div class="container">
+      <br>
+      <div class="row">
+      <label><strong><span style="color:#534d4d">Family Member Details :</span></strong></label>
+
+      <table class="table table-bordered table-hover table-responsive-lg">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Relationship</th>
+              <th scope="col">Marital Status</th>
+              <th scope="col">Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in Family %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ data.Name }}</td>
+              <td>{{ data.Gender }}</td>
+              <td>{{ data.Relationship }}</td>
+              <td>{{ data.Marital }}</td>
+              <td>{{ data.Phone }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        </div>
+                <div class="row">
+                  <label><strong><span style="color:#534d4d">New Born Baby Details :</span></strong></label>
+            
+                  <table class="table table-bordered table-hover table-responsive-lg">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Gender</th>
+                          <th scope="col">Date Of Birth</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for data in baby %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ data.Name }}</td>
+                          <td>{{ data.Gender }}</td>
+                          <td>{{ data.DOB }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+            
+                    </div>
+
+                    <div class="row">
+                      <label><strong><span style="color:#534d4d">Palliative Details :</span></strong></label>
+                
+                      <table class="table table-bordered table-hover table-responsive-lg">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">No</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Issue</th>
+                              <th scope="col">Commets</th>
+                              <th scope="col">Contact</th>
+                              <th scope="col">Report Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for data in pall %}
+                            <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ data.Name }}</td>
+                              <td>{{ data.Issue }}</td>
+                              <td>{{ data.Comments }}</td>
+                              <td>{{ data.Mobile }}</td>
+                              <td>{{ data.Register_Date }}</td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                
+                        </div>
+
+
+                        <div class="row">
+                          <label><strong><span style="color:#534d4d">Pregnancy Women's Details :</span></strong></label>
+                    
+                          <table class="table table-bordered table-hover table-responsive-lg">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">No</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Hospital</th>
+                                  <th scope="col">Doctor</th>
+                                  <th scope="col">Contact</th>
+                                  <th scope="col">Report Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for data in pre %}
+                                <tr>
+                                  <td>{{ forloop.counter }}</td>
+                                  <td>{{ data.Name }}</td>
+                                  <td>{{ data.Hospital }}</td>
+                                  <td>{{ data.Doctor }}</td>
+                                  <td>{{ data.Mobile }}</td>
+                                  <td>{{ data.Register_Date }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                    
+                            </div>
+
+        </div>
+
+ 
+    <br>
+
+         <!-- Message button --> 
+         <script>
+        
+          var close = document.getElementsByClassName("closebtn");
+          var i;
+          
+          for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+              var div = this.parentElement;
+              div.style.opacity = "0";
+              setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+          }
+          </script>
+
+         <!-- Message button --> 
+<script>
+        
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+  
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="{% static 'User/js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="{% static 'User/js/popper.min.js' %}"></script>
+    <script src="{% static 'User/js/bootstrap-4.0.0.js' %}"></script>
+    
+  </body>
+</html>

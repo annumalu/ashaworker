@@ -1,0 +1,58 @@
+{% extends 'Base.html' %}
+{% block body %}
+
+
+	<div class="container-contact100">
+<!--		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div> -->
+			<div class="contact100-map" style="background-color: gainsboro;" data-scrollwhell="0" data-draggable="1"></div>
+
+		<div class="wrap-contact100">
+			<div class="contact100-form-title" style="background-image: url(../static/images/bg-01.jpg);">
+				<span class="contact100-form-title-1">
+					New Born Baby Details
+				</span>
+			</div>
+
+			<form class="contact100-form validate-form" method="POST">
+				{% csrf_token %}
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Full Name:</span>
+					<input class="input100" type="text" name="babtismname" id="babtismnameId" placeholder="Name" pattern="[a-zA-Z ]+" title="Please Enter Valid Name" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Gender:</span>
+					<select class="input100" name="gender" id="gender" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Gender...</option> 
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Date of Birth:</span>
+					<input class="input100" type="date" name="date" id="date" required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div>
+					<div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" style="margin-left: 50px;">
+                            <span>
+                                ADD
+                                <i class="fa fa-plus m-l-7" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+	{% endblock %}

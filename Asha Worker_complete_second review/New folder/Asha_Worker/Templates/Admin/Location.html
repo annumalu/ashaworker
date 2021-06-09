@@ -1,0 +1,331 @@
+﻿{% extends "Admin/Base.html" %}
+{% load static %}
+
+{% block head %}
+				<li class="text-center">
+                    <img src="{% static 'Staff/assets/img/find_user.png' %}" class="user-image img-responsive"/>
+					</li>
+				
+					
+                    <li>
+                        <a   href="{% url 'AdminHome' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                     <li>
+                        <a  href="{% url 'Organizer' %}"><i class="fa fa-plus-circle fa-3x"></i> Organizer</a>
+                    </li>
+                    <li>
+                        <a class="active-menu" href="{% url 'Location' %}"><i class="fa fa-location-arrow fa-3x"></i> Location</a>
+                    </li>
+					<li>
+                        <a   href="{% url 'Reports' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Reports</a>
+                    </li>			
+                  <li>
+                        <a  href="{% url 'Logout' %}"><i class="fa fa-sign-out fa-3x"></i> Logout</a>
+                    </li>	
+
+{% endblock  %}
+
+
+{% block body %}
+
+{% if messages %}
+      {% for message in messages %}
+      <input type="text" value="{{message}}" id="msgval" hidden>
+      <script>
+        var Xval = document.getElementById("msgval").value 
+		  alert(Xval)
+	  </script>
+      {% endfor %}
+  {% endif %}
+
+        <div id="page-wrapper" >
+            <div id="page-inner">
+
+				<div class="col-md-12 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add Location
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills">
+                                <!--<li class="active"><a href="#profile-pills" data-toggle="tab">State</a>
+                                </li>
+                                <li class=""><a href="#messages-pills" data-toggle="tab">District</a>
+                                </li>
+                                <li class=""><a href="#settings-pills" data-toggle="tab">Panchayath/Mucipality</a>
+                                </li>
+                                <li class=""><a href="#settings-pill" data-toggle="tab">Wards</a>
+                                </li>-->
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="profile-pills">
+									<br>
+									<!--<center><h2 class="card-title">ADD NEW STATE</h2></center> -->
+									<br>
+				<form method="POST" action="{% url 'Location' %}">
+          {% csrf_token %}				
+		<div class="row">
+
+       <div class="col-md-6 text-center">
+          <div class="card">
+             <div class="card-body">  
+                 <input class="form-control mr-sm-2" type="text" name="State" placeholder="Enter State Name" required><br>         
+             </div>
+         </div>
+       </div> 
+        
+      <div class="col-md-2 text-center">
+          <div class="card">
+             <div class="card-body">
+                 <button type="submit" name="state" class="btn btn-success btn-md form-control" >ADD</button>
+             </div>
+          </div>
+       </div> 
+
+    </div>
+  </form>	
+
+  <br>
+ <!-- <center><h2 class="card-title">ADD NEW DISTRICTS</h2></center> -->
+  <br>
+<form method="POST" action="{% url 'Location' %}">
+{% csrf_token %}				
+<div class="row">
+
+<div class="col-md-6 text-center">
+<div class="card">
+<div class="card-body">
+
+<select name="state_id" class="nav-item dropdown form-control mr-sm-2" id="gh" required>
+<option value="" disabled selected hidden>Choose State</option>
+{% for data in state %}
+  <option value="{{data.id}}">{{data.State_Name}}</option>
+{% endfor %}
+</select><br> 
+ 
+ <input class="form-control mr-sm-2" type="text" name="District" placeholder="Enter District Name" required><br>
+
+</div>
+</div>
+</div> 
+
+<div class="col-md-2 text-center">
+<div class="card">
+<div class="card-body">
+ <button type="submit" name="district" class="btn btn-success btn-md form-control" >ADD</button>
+</div>
+</div>
+</div> 
+
+</div>
+</form>	
+
+
+<br>
+                                  <!--<center><h2 class="card-title">ADD NEW Panchayath/Muncipality</h2></center> -->
+                                  <br>
+                        <form method="POST" action="{% url 'Location' %}">
+                          {% csrf_token %}				
+                    <div class="row">
+                
+                       <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+
+                              <select name="state_id" class="nav-item dropdown form-control mr-sm-2" id="state_id" required>
+                                <option value="" disabled selected hidden>Choose State</option>
+                                </select><br> 
+
+                                <select name="dist_id" class="nav-item dropdown form-control mr-sm-2" id="district" required>
+                                  <option value="" disabled selected hidden>Choose District</option>
+                                  </select><br> 
+                                 
+                                 <input class="form-control mr-sm-2" type="text" name="pan_name" placeholder="Enter Panchayath/Municipality Name" required><br>
+
+                             </div>
+                         </div>
+                       </div> 
+                        
+                      <div class="col-md-2 text-center">
+                          <div class="card">
+                             <div class="card-body">
+                                 <button type="submit" name="panchayath" class="btn btn-success btn-md form-control" >ADD</button>
+                             </div>
+                          </div>
+                       </div> 
+                
+                    </div>
+                  </form>	
+
+
+                  <br>
+                                 <!-- <center><h2 class="card-title">ADD NEW WARDS</h2></center> -->
+                                  <br>
+                        <form method="POST"  action="{% url 'Location' %}">
+                          {% csrf_token %}				
+                    <div class="row">
+                
+                       <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+
+                              <select name="kerala" class="nav-item dropdown form-control mr-sm-2" id="ward_kerala" required>
+                                <option value="" disabled selected hidden>Choose State</option>
+                                </select><br> 
+
+                                <select name="district" class="nav-item dropdown form-control mr-sm-2" id="ward_district" required>
+                                  <option value="" disabled selected hidden>Choose District</option>
+                                  </select><br> 
+
+                                  <select name="panch" class="nav-item dropdown form-control mr-sm-2" id="ward_pan"  required>
+                                    <option value="" disabled selected hidden>Choose Panchayath/Muncipality</option>
+                                    </select><br>
+                                 
+                                 <input class="form-control mr-sm-2" type="text" name="waname" placeholder="Enter Ward Name" required><br>
+
+                             </div>
+                         </div>
+                       </div> 
+                        
+                      <div class="col-md-2 text-center">
+                          <div class="card">
+                             <div class="card-body">
+                                 <button type="submit" name="ward"  class="btn btn-success btn-md form-control" >ADD</button>
+                             </div>
+                          </div>
+                       </div> 
+                
+                    </div>
+                  </form>
+
+</div>
+                 <!--<div class="tab-pane fade" id="messages-pills">
+                                  
+                                  <br>
+                                  <center><h2 class="card-title">ADD NEW DISTRICTS</h2></center> 
+                                  <br>
+                        <form method="POST" action="{% url 'Location' %}">
+                          {% csrf_token %}				
+                    <div class="row">
+                
+                       <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+
+                              <select name="state_id" class="nav-item dropdown form-control mr-sm-2" id="gh" required>
+                                <option value="" disabled selected hidden>Choose State</option>
+                                {% for data in state %}
+                                  <option value="{{data.id}}">{{data.State_Name}}</option>
+                                {% endfor %}
+                                </select><br> 
+                                 
+                                 <input class="form-control mr-sm-2" type="text" name="District" placeholder="Enter District Name" required><br>
+
+                             </div>
+                         </div>
+                       </div> 
+                        
+                      <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+                                 <button type="submit" name="district" class="btn btn-success btn-md form-control" >Submit</button>
+                             </div>
+                          </div>
+                       </div> 
+                
+                    </div>
+                  </form>	
+									 
+                                </div>
+                                <div class="tab-pane fade " id="settings-pills">
+                                  
+                                  <br>
+                                  <center><h2 class="card-title">ADD NEW Panchayath/Muncipality</h2></center> 
+                                  <br>
+                        <form method="POST" action="{% url 'Location' %}">
+                          {% csrf_token %}				
+                    <div class="row">
+                
+                       <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+
+                              <select name="state_id" class="nav-item dropdown form-control mr-sm-2" id="state_id" required>
+                                <option value="" disabled selected hidden>Choose State</option>
+                                </select><br> 
+
+                                <select name="dist_id" class="nav-item dropdown form-control mr-sm-2" id="district" required>
+                                  <option value="" disabled selected hidden>Choose District</option>
+                                  </select><br> 
+                                 
+                                 <input class="form-control mr-sm-2" type="text" name="pan_name" placeholder="Enter Panchayath/Municipality Name" required><br>
+
+                             </div>
+                         </div>
+                       </div> 
+                        
+                      <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+                                 <button type="submit" name="panchayath" class="btn btn-success btn-md form-control" >Submit</button>
+                             </div>
+                          </div>
+                       </div> 
+                
+                    </div>
+                  </form>	
+
+                                </div>
+
+                                <div class="tab-pane fade " id="settings-pill">
+                                  <br>
+                                  <center><h2 class="card-title">ADD NEW WARDS</h2></center> 
+                                  <br>
+                        <form method="POST"  action="{% url 'Location' %}">
+                          {% csrf_token %}				
+                    <div class="row">
+                
+                       <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+
+                              <select name="kerala" class="nav-item dropdown form-control mr-sm-2" id="ward_kerala" required>
+                                <option value="" disabled selected hidden>Choose State</option>
+                                </select><br> 
+
+                                <select name="district" class="nav-item dropdown form-control mr-sm-2" id="ward_district" required>
+                                  <option value="" disabled selected hidden>Choose District</option>
+                                  </select><br> 
+
+                                  <select name="panch" class="nav-item dropdown form-control mr-sm-2" id="ward_pan"  required>
+                                    <option value="" disabled selected hidden>Choose Panchayath/Muncipality</option>
+                                    </select><br>
+                                 
+                                 <input class="form-control mr-sm-2" type="text" name="waname" placeholder="Enter Ward Name" required><br>
+
+                             </div>
+                         </div>
+                       </div> 
+                        
+                      <div class="col-md-6 text-center">
+                          <div class="card">
+                             <div class="card-body">
+                                 <button type="submit" name="ward"  class="btn btn-success btn-md form-control" >Submit</button>
+                             </div>
+                          </div>
+                       </div> 
+                
+                    </div>
+                  </form>
+                               </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+            
+            {% endblock  %}

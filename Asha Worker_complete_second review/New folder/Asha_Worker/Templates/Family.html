@@ -1,0 +1,88 @@
+{% extends 'Base.html' %}
+{% block body %}
+
+
+	<div class="container-contact100">
+<!--		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div> -->
+			<div class="contact100-map" style="background-color: gainsboro;" data-scrollwhell="0" data-draggable="1"></div>
+
+		<div class="wrap-contact100">
+			<div class="contact100-form-title" style="background-image: url(../static/images/bg-01.jpg);">
+				<span class="contact100-form-title-1">
+					Family Members Details
+				</span>
+
+				<span class="contact100-form-title-2">
+					Enter family members details
+				</span>
+			</div>
+
+			<form class="contact100-form validate-form" method="POST">
+				{% csrf_token %}
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Full Name:</span>
+					<input class="input100" type="text" name="othersname" id="othersnameId" placeholder="full name" pattern="[a-zA-Z ]+" title="Please Enter Valid Name" required>
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Gender:</span>
+					<select class="input100" name="gender" id="gender" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Gender...</option> 
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+				</div>
+				
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Relationship:</span>
+					<select class="input100" name="relationship" id="relationshipId" style="padding-top: 10px; border-color: transparent;" required>
+						<option value="" disabled selected hidden>Select Relationship...</option> 
+						<option value="Wife">Wife</option>
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Brother">Brother</option>
+                        <option value="Sister">Sister</option>
+                        <option value="Grand Father">Grand Father</option>
+                        <option value="Grand Mother">Grand Mother</option>
+                        <option value="Son">Son</option>
+						<option value="Daughter">Daughter</option>
+						<option value="Others">Others</option>
+                    </select>
+				</div>
+				
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Marital Status:</span>
+					<select class="input100" name="Marital" id="Marital" style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Marital Status...</option> 
+                        <option value="Married">Married</option>
+                        <option value="Unmarried">Unmarried</option>
+						<option value="Others">Others</option>
+                    </select>
+                </div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Mobile:</span>
+					<input class="input100" type="text" name="othermobile" id="othermobileId" placeholder="eg : 7095809073" pattern="[789][0-9]{9}" minlength="10" maxlength="10" required>
+					<span class="focus-input100"></span>
+                </div>
+
+				<div>
+					<div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" style="margin-left: 50px;">
+                            <span>
+                                ADD
+                                <i class="fa fa-plus m-l-7" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+	{% endblock %}

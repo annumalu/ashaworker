@@ -1,0 +1,103 @@
+﻿{% extends "Admin/Base.html" %}
+{% load static %}
+
+{% block head %}
+				<li class="text-center">
+                    <img src="{% static 'Staff/assets/img/find_user.png' %}" class="user-image img-responsive"/>
+					</li>
+				
+					
+                    <li>
+                        <a   href="{% url 'AdminHome' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                     <li>
+                        <a class="active-menu" href="{% url 'Organizer' %}"><i class="fa fa-plus-circle fa-3x"></i> Organizer</a>
+                    </li>
+                    <li>
+                        <a  href="{% url 'Location' %}"><i class="fa fa-location-arrow fa-3x"></i> Location</a>
+                    </li>
+					<li>
+                        <a   href="{% url 'Reports' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Reports</a>
+                    </li>			
+                  <li>
+                        <a  href="{% url 'Logout' %}"><i class="fa fa-sign-out fa-3x"></i> Logout</a>
+                    </li>	
+
+{% endblock  %}
+
+{% block body %}
+      
+        <div id="page-wrapper" >
+            <div id="page-inner">
+               <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Create Organizer
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" enctype="multipart/form-data" method="POST">
+                                {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+
+                                        <div class="form-group">
+                                            <label>First Name :</label>
+                                            <input class="form-control" name="first" placeholder="First Name" pattern="[A-Za-z]{3,9}" title="Please Enter Valid Name"  required/><br>
+                                            <label>Select Gender</label>
+                                            <select name="gender" class="form-control" required>
+                                                <option value="" disabled selected hidden>Choose Gender</option>
+                                                <option value="Male">Male</option>
+                                                  <option value="Female">Female</option>
+                                            </select><br>
+                                            <label>Mobile Number :</label>
+                                            <input class="form-control" name="mobile" placeholder="Mobile Number"  maxlength="10"  pattern="[789][0-9]{9}" title="Please Enter Valid Number" required/><br>
+                                            <label>State :</label>
+                                            <select name="kerala" class="nav-item dropdown form-control mr-sm-2" id="org_state" required>
+                                                <option value="" disabled selected hidden>Choose State</option>
+                                                {% for data in state %}
+                                                <option value="{{data.id}}">{{data.State_Name}}</option>
+                                                {% endfor %}
+                                            </select><br> 
+                                            <label>Username</label>
+                                            <input class="form-control" name="username" value="{{username}}" readonly required/><br>
+                                        </div>
+                                       
+                                    
+
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label>Last Name :</label>
+                                    <input class="form-control" name="last" placeholder="Last Name" pattern="[A-Za-z]{3,9}" title="Please Enter Valid Name" required/><br>
+                                    <label>Date Of Birth :</label>
+                                    <input class="form-control mr-sm-2" type="text" name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date Of Birth" max="2000-01-01" required><br>
+                                    <label>Image :</label>
+                                    <input class="form-control mr-sm-2" name="myimg"  type="text" onfocus="(this.type='file')"  id="myimage" placeholder="Upload Your Image" title="Upload Image" accept="image/*" required><br>
+                                    <label>District :</label>
+                                    <select name="dist" class="nav-item dropdown form-control mr-sm-2" id="org_dist" required>
+                                    <option value="" disabled selected hidden>Choose District</option>
+
+                                    </select><br>
+                                    <label><span style="color: white;">g</span></label>
+                                    <button type="submit" class="btn btn-success btn-md form-control" >Submit</button>
+                                </div>
+
+                                
+                            </div>
+
+                        </form>
+                        </div>
+                    </div>
+                     <!-- End Form Elements -->
+                </div>
+            </div>
+              
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+            
+            
+{% endblock  %}

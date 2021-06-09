@@ -1,0 +1,72 @@
+{% extends 'Base.html' %}
+{% block body %}
+
+
+	<div class="container-contact100">
+<!--		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div> -->
+			<!--<div class="contact100-map" style="background-image: url(../Static/images/bg-03.jpg);" data-scrollwhell="0" data-draggable="1"></div>-->
+			<div class="contact100-map" style="background-color: gainsboro;" data-scrollwhell="0" data-draggable="1"></div>
+		<div class="wrap-contact100">
+			<div class="contact100-form-title" style="background-image: url(../Static/images/bg-01.jpg);">
+				<span class="contact100-form-title-1">
+					Registration
+				</span>
+
+			</div>
+
+			<form class="contact100-form validate-form" method="POST">
+				{% csrf_token %}
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Name:</span>
+					<select class="input100" name="name"  style="padding-top: 10px; border-color: transparent;" required>
+                        <option value="" disabled selected hidden>Select Member...</option> 
+                        <option value="{{own.Auth_Id}}">{{own.Name}}</option>
+                        {% for data in data %}
+                        <option value="{{data.id}}">{{data.Name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">Date Of Birth:</span>
+					<input class="input100" type="date" name="dob"  required>
+					<span class="focus-input100"></span>
+                </div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Mobile:</span>
+					<input class="input100" type="text" name="mobile" id="mobileId" placeholder="eg : 7095809073" pattern="[789][0-9]{9}" minlength="10" maxlength="10" required>
+					<span class="focus-input100"></span>
+                </div>
+                
+                <div class="wrap-input100 validate-input">
+					<span class="label-input100">Issue:</span>
+					<input class="input100" type="text" name="issue" id="emailId" placeholder="Health Issue" required>
+					<span class="focus-input100"></span>
+                </div>
+
+				<div class="wrap-input100 validate-input">
+					<span class="label-input100">Comments:</span>
+					<input class="input100" type="text" name="comments" id="emailId" placeholder="Comments" required>
+					<span class="focus-input100"></span>
+                </div>
+
+				<div>
+					<div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" style="margin-left: 50px;">
+                            <span>
+                                REGISTER
+                            </span>
+                        </button>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+	{% endblock %}

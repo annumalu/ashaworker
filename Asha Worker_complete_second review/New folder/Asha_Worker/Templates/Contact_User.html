@@ -1,0 +1,342 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <style>
+      * {box-sizing: border-box}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container1 {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content1 {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+    width: 100%;
+  }
+}
+    </style>
+
+    <style>
+       
+      .alert {
+        padding: 9px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+      
+      .alert.success {background-color: #4CAF50;}
+      .alert.info {background-color: #2196F3;}
+      .alert.warning {background-color: #ff9800;}
+      
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .closebtn:hover {
+        color: black;
+      }
+    
+      .input-icons i { 
+         position: absolute; 
+     } 
+       
+     .input-icons { 
+         width: 100%; 
+         margin-bottom: 10px; 
+     } 
+       
+     .icon { 
+         padding: 10px; 
+         color: green; 
+         min-width: 50px; 
+         text-align: center; 
+     } 
+       
+     .input-field { 
+         width: 100%; 
+         padding: 10px; 
+         text-align: center; 
+     } 
+       
+     h2 { 
+         color: green; 
+     } 
+    
+      </style>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REGISTER BOOK</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'Base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
+
+  </head>
+  <body >
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       
+      <a class="navbar-brand" href="#"><p><h2>ASHA WORKER</h2></p></a>
+      
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         
+            <ul class="navbar-nav mr-auto">
+            
+          <li>
+          </li>		  
+            </ul>
+              
+            <form class="form-inline my-2 my-lg-0">
+
+              <li class="nav-link"> <span style="color: white;">Welcome : {{user.username}}</span>  
+               </li> 
+              <li class="nav-link"> <a  href="{% url 'AshaHome' %}">  
+                <i class="fa fa-home" style="font-size: 32px; color:white;"></i>
+              </a>
+               </li> 
+
+             <li class="nav-link"> <a  href="{% url 'Logout' %}">  
+              <i class="fas fa-sign-out-alt" style="font-size: 32px; color:white;"></i>
+            </a>
+             </li> 
+             
+       </form>
+         </div>
+      </nav>
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <br>
+      <div class="alert success">
+       <span class="closebtn">&times;</span>  
+      <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    </div>
+    <br>
+      {% endfor %}
+  {% endif %}
+ 
+       <div class="container">
+
+        <br><br>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3">
+                <select name="dist_id" class="nav-item dropdown form-control mr-sm-2" id="district" required>
+                    <option value="" disabled selected hidden>Choose Id</option>
+                    {% for data in pend %}
+                    <option value="{{data.id}}">{{data.User_Info}}</option>
+                    {% endfor %}
+                </select><br>  
+            </div>
+            <div class="col-3">
+                <input type="submit" value="GET" name="search" class="btn btn-info form-control">
+            </div>
+        </div>
+    </form>
+        <br><br>
+        <div class="row">
+     
+           <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                  <center><h4 class="card-title">CONTACT USERS</h4></center>
+                   <hr>
+                   <form method="POST">
+                       {% csrf_token %}
+                   
+                   <div class="row">
+                       <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                    <label><strong>User ID :</strong></label>
+                   <input class="form-control mr-sm-2" type="text"   readonly  value="{{ data.User_Info }}">
+                   <label><strong>Message :</strong></label>
+                   <input class="form-control mr-sm-2" type="text"  disabled  value="{{ data.Message }}">
+                   <label><strong>Reply :</strong></label>
+                   <input class="form-control mr-sm-2" name="res" type="text" placeholder="Your Response" required>
+                   </div>
+                   </div>
+                   
+                   </div>
+                   
+                   <div class="col-md">
+                       <div class="">
+                       <div class="card-body">
+                    <label><strong>Title :</strong></label>
+                   <input class="form-control mr-sm-2" type="text"  disabled value="{{ data.Subject }}" >
+                   <label><strong>Date :</strong></label>
+                   <input class="form-control mr-sm-2" type="text"  disabled value="{{ data.Date}}">
+                   <label><strong><span style="color: white;">h</span></strong></label>
+                   <input type="text" name="user_id" hidden value="{{data.id}}">
+                   <input type="submit" name="updt" class="btn btn-success form-control">
+               </div>
+            </div>
+  
+         </div>   
+         </div>
+        </form>
+                  </div>
+                </div>
+              </div>
+
+              
+      </div>
+             
+    </div>
+
+<br>
+ 
+    <br><br>
+
+         <!-- Message button --> 
+         <script>
+        
+          var close = document.getElementsByClassName("closebtn");
+          var i;
+          
+          for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+              var div = this.parentElement;
+              div.style.opacity = "0";
+              setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+          }
+          </script>
+
+         <!-- Message button --> 
+<script>
+        
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+  
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="{% static 'User/js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="{% static 'User/js/popper.min.js' %}"></script>
+    <script src="{% static 'User/js/bootstrap-4.0.0.js' %}"></script>
+    
+  </body>
+</html>
